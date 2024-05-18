@@ -1,0 +1,64 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.map-container {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+}
+
+.card-content {
+    overflow: hidden;
+    overscroll-behavior-y: contain;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+}
+
+.modal {
+    overflow: hidden;
+    overscroll-behavior-y: contain;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+}
+
+.carousel .carousel-item {
+    visibility: visible !important;
+}
+
+.loader-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1004;
+}
+
+img:not([src]):not([srcset]) {
+    visibility: hidden;
+}
+
+.lazyload {
+    opacity: 0;
+}
+
+.lazyloading {
+    opacity: 1;
+    transition: opacity 300ms;
+    background: #f7f7f7 url('../../images/loader.gif') no-repeat center;
+}
+
+.hidden {
+    display: none !important;
+}

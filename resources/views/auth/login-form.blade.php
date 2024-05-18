@@ -1,0 +1,33 @@
+<div id="login-form" class="col-md-8">
+    <div class="mb-4">
+        <h3>Sign In</h3>
+    </div>
+    <form id="login-form" class="col s12" method="post" action="{{ route('login') }}">
+        @csrf
+
+        <x-forms.input name="email"/>
+        <x-forms.input name="password" type="password"/>
+        <x-forms.checkbox name="Remember me" type="password"/>
+        <x-forms.button value="Sign In"/>
+
+        <span class="d-block text-center my-4 text-muted">&mdash; or sign in with &mdash;</span>
+
+        <div class="row justify-content-center">
+            <div class="col-md-10 text-center">
+                <div id="g_id_onload"
+                     data-client_id="{{ config('services.google.client_id') }}"
+                     data-login_uri={{url('/auth/login/google')}}
+                     data-auto_prompt="false">
+                </div>
+                <div class="g_id_signin"
+                     data-type="standard"
+                     data-size="large"
+                     data-theme="outline"
+                     data-text="sign_in_with"
+                     data-shape="rectangular"
+                     data-logo_alignment="left">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
