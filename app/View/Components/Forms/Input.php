@@ -13,6 +13,7 @@ class Input extends Component
      */
     public function __construct(
         public string $name,
+        public ?string $text = null,
         public string $type = 'text',
         public mixed $value = ''
     )

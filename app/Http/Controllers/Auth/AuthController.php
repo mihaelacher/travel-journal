@@ -15,7 +15,7 @@ class AuthController extends Controller
         $this->middleware(function ($request, $next) {
             if (empty(Auth::user())){
                 return redirect('/auth')
-                    ->with('message', 'Your session has expired. Enter the data again.')
+                    ->with('message', trans('auth.session_expired'))
                     ->with('classes', 'alert-danger');
             }
 

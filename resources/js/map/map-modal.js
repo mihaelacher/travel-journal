@@ -90,7 +90,7 @@ const mapModal = {
     },
 
     deleteVisitedLocationHandler() {
-        $('#deleteVisitedLocationBtn').click(function (e) {
+        $('#delete-location-btn').click(function (e) {
             e.preventDefault();
 
             const locationId = $('#location_id').val();

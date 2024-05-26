@@ -33,7 +33,7 @@ class DeleteVisitedLocationRequest extends MainFormRequest
     public function messages(): array
     {
         return [
-            'location_id.required' => 'Select location.',
+            'location_id.required' => trans('validation.required', ['attribute' => 'location']),
         ];
     }
 }

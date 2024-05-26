@@ -22,8 +22,8 @@
                                     <label>
                                         <input type="checkbox">
                                         <span class="lever"></span>
-                                        <span id="sign-up-form-switch">Don't have account yet? Sign up now.</span>
-                                        <span id="sign-in-form-switch" class="hidden">Return to sign in form.</span>
+                                        <span id="sign-up-form-switch">{{ trans('auth.sign_up_msg') }}</span>
+                                        <span id="sign-in-form-switch" class="hidden">{{ trans('auth.show_sign_up_form_msg') }}</span>
                                     </label>
                                 </div>
                             </div>

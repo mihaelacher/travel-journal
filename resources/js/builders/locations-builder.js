@@ -10,7 +10,7 @@ class LocationsBuilder {
         this.map = map;
         this.mapMarkers = {};
         this.initMarkerBuilder().catch(error => {
-            console.error("Failed to initialize MarkerBuilder:", error);
+            console.error(i18next.t('logging.marker_builder_error'), error);
         });
 
         LocationsBuilder.instance = this;
@@ -22,7 +22,7 @@ class LocationsBuilder {
             const {PinElement, AdvancedMarkerElement} = await google.maps.importLibrary("marker");
             this.markerBuilder = new MarkerBuilder(this.map, AdvancedMarkerElement, PinElement);
         } catch (error) {
-            throw new Error("Failed to initialize MarkerBuilder: " + error);
+            throw new Error(i18next.t('logging.marker_builder_error') + error);
         }
     }
 

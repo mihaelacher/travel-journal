@@ -33,7 +33,7 @@ class Handler extends ExceptionHandler
         $this->renderable(function (Throwable $e, $request) {
             // usually on ajax requests
             if ($request->expectsJson()) {
-                return response()->json(['error' => 'Something went wrong!'], 500);
+                return response()->json(['error' => trans('map.general_error')], 500);
             }
         });
     }

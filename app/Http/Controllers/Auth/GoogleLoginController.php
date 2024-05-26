@@ -43,7 +43,7 @@ class GoogleLoginController extends Controller
             LogUtil::logError(message: $t->getMessage());
             return redirect()
                 ->back()
-                ->with('error', 'Failed to log in. Please try again.');
+                ->with('error', trans('auth.login_failed'));
         }
 
         return redirect('dashboard');

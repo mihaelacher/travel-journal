@@ -16,7 +16,7 @@
     @if(! $isShared)
         <div class="card-reveal center col md-8">
             <div class="container">
-            <span class="card-title grey-text text-darken-4">Mark place as visited<i
+            <span class="card-title grey-text text-darken-4">{{trans('map.mark_place_as_visited_msg')}}<i
                     class="material-icons medium right">arrow_drop_down</i></span>
                 <form id="place-visited-form" class="col md-8" enctype="multipart/form-data">
                     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -24,8 +24,9 @@
                     <input name="name" type="hidden" value="{{$name}}"/>
                     <input name="latitude" type="hidden" value="{{$latitude}}"/>
                     <input name="longitude" type="hidden" value="{{$longitude}}"/>
-                    <x-forms.datepicker name="visited_at" labelText="Visited at" value="{{$visitedAt}}"/>
-                    <x-forms.file-input name="place_photos" placeholder="Upload one or more photos from the place"/>
+                    <x-forms.datepicker name="visited_at" labelText="{{ trans('map.visited_at_label') }}"
+                                        value="{{$visitedAt}}"/>
+                    <x-forms.file-input name="place_photos" placeholder="{{ trans('map.image_placeholder') }}"/>
                     <div class="row justify-content-center">
                         <div class="col-md-10 text-center">
                             <div class="row">
@@ -34,7 +35,7 @@
                                     <i class="material-icons right">send</i>
                                 </button>
                                 @if(! empty($visitedAt))
-                                    <button class="btn waves-effect waves-light red" id="deleteVisitedLocationBtn">
+                                    <button class="btn waves-effect waves-light red" id="delete-location-btn">
                                         Delete
                                         <i class="material-icons right">remove_circle</i>
                                     </button>

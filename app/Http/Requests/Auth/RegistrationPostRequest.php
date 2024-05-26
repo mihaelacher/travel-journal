@@ -27,20 +27,18 @@ class RegistrationPostRequest extends MainFormRequest
     public function messages(): array
     {
         return [
-            'name.required' => 'The name field is required.',
-            'name.string' => 'The name must contain characters.',
-            'name.max' => 'The name may not be greater than :max characters.',
-
-            'email.required' => 'The email field is required.',
-            'email.string' => 'The email must contain characters.',
-            'email.email' => 'The email must be a valid email address.',
-            'email.max' => 'The email may not be greater than :max characters.',
-            'email.unique_email_attribute' => 'User with this email already exists.',
-
-            'password.required' => 'The password field is required.',
-            'password.string' => 'The password must contain characters.',
-            'password.min' => 'The password must be at least :min characters.',
-            'password.confirmed' => 'The password confirmation does not match.',
+            'name.required' => trans('validation.required', ['attribute' => 'name']),
+            'name.string' => trans('validation.string', ['attribute' => 'name']),
+            'name.max' => trans('validation.max.string', ['attribute' => 'name', 'max' => 255]),
+            'email.required' => trans('validation.required', ['attribute' => 'email']),
+            'email.string' => trans('validation.string', ['attribute' => 'email']),
+            'email.email' => trans('validation.email', ['attribute' => 'email']),
+            'email.max' => trans('validation.max.string', ['attribute' => 'email', 'max' => 255]),
+            'email.unique_email_attribute' => trans('validation.unique', ['attribute' => 'email']),
+            'password.required' => trans('validation.required', ['attribute' => 'password']),
+            'password.string' => trans('validation.string', ['attribute' => 'password']),
+            'password.min' => trans('validation.min.string', ['attribute' => 'password', 'min' => 8]),
+            'password.confirmed' => trans('validation.confirmed', ['attribute' => 'password']),
         ];
     }
 }

@@ -60,14 +60,14 @@ const utils = {
     fetchImageData: async function(url) {
         const response = await fetch(url);
         if (!response.ok) {
-            throw new Error('Failed to fetch image');
+            throw new Error(i18next.t('map.image_fetching_failed'));
         }
         return await response.blob();
     },
 
     handleError: function(xhr, status, error) {
         utils.hideLoader();
-        utils.showErrorMessage('Something went wrong! Please, try again later.');
+        utils.showErrorMessage(i18next.t('map.general_error'));
     },
 
     parseLocation: function (longitude, latitude) {

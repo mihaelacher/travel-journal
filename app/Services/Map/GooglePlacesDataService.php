@@ -20,7 +20,7 @@ class GooglePlacesDataService
         $data = json_decode($apiData, true);
 
         if ($data === null) {
-            throw new DataFormattingException(message: 'Invalid JSON data.');
+            throw new DataFormattingException(message: trans('map.invalid_json'));
         }
 
         if ($data['status'] === 'OK') {
@@ -30,15 +30,15 @@ class GooglePlacesDataService
         switch ($data['status']) {
             case 'NOT_FOUND':
             case 'ZERO_RESULTS':
-                return ['warning' => 'No results found for the requested area.', 'data' => []];
+                return ['warning' => trans('map.request_empty_data'), 'data' => []];
             case 'INVALID_REQUEST':
             case 'OVER_QUERY_LIMIT':
             case 'UNKNOWN_ERROR':
-                throw new DataFormattingException(message: 'Error: ' . $data['status']);
+                throw new DataFormattingException(message: $data['status']);
             case 'REQUEST_DENIED':
-                throw new DataFormattingException(message: 'Error accessing required data. Please, try again later.');
+                throw new DataFormattingException(message: trans('map.request_access_error'));
             default:
-                throw new DataFormattingException(message: 'Unknown error. Please, try again later.');
+                throw new DataFormattingException(message: trans('map.request_unknown_error'));
         }
     }
 

@@ -32,11 +32,11 @@ const auth = () => {
             },
             messages: {
                 password: {
-                    required: "Please enter your password"
+                    required: i18next.t('validation.required', { attribute: 'password' }),
                 },
                 email: {
-                    required: "Please enter your email",
-                    email: "Please enter a valid email address"
+                    required: i18next.t('validation.required', { attribute: 'email' }),
+                    email: i18next.t('validation.email', { attribute: 'password' }),
                 }
             },
             submitHandler: (form) => {

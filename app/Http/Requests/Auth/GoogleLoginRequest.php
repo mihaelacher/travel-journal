@@ -38,7 +38,7 @@ class GoogleLoginRequest extends MainFormRequest
     {
         $csrfToken = $this->input('g_csrf_token');
         if (! $csrfToken || ! $this->session()->token() === $csrfToken) {
-            throw new AuthorizationException('CSRF token mismatch', 403);
+            throw new AuthorizationException( trans('auth.csrf_mismatch'), 403);
         }
     }
 
@@ -55,7 +55,7 @@ class GoogleLoginRequest extends MainFormRequest
             $this->payload = new InputBag($payload);
         } catch (\Exception $e) {
             LogUtil::logError(message: $e->getMessage());
-            throw new AuthorizationException('Token verification failed.', 403);
+            throw new AuthorizationException(trans('auth.token_failed'), 403);
         }
     }
 }

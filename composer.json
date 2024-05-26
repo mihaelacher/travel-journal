@@ -19,7 +19,8 @@
         "mews/purifier": "^3.4",
         "predis/predis": "^2.2",
         "sentry/sentry-laravel": "^4.3",
-        "spatie/laravel-data": "^4.6"
+        "spatie/laravel-data": "^4.6",
+        "ufirst/lang-import-export": "^8.1"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

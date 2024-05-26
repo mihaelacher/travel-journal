@@ -1,6 +1,7 @@
 import utils from "@/utils/utils.js";
 import mapShareLocationsModal from "@/map/map-share-locations-modal.js";
 import LocationsBuilder from "@/builders/locations-builder.js";
+import i18next from "i18next";
 
 const mapInitializer = {
     async init() {
@@ -11,7 +12,7 @@ const mapInitializer = {
             try {
                 locationObj = await this.getCurrentGeoLocation();
             } catch (e) {
-                console.warn('Access to geo location denied.');
+                console.warn(i18next.t('logging.geo_location_access_error'));
                 locationObj = this.getRandomLocation();
             }
 
@@ -25,7 +26,7 @@ const mapInitializer = {
 
             mapShareLocationsModal.fetchModal(map);
         } catch (error) {
-            console.error("Error initializing map:", error);
+            console.error(i18next.t('logging.error_initializing_map'), error);
         }
     },
 
@@ -51,15 +52,15 @@ const mapInitializer = {
     handleCurrentLocationError(error) {
         switch (error.code) {
             case error.PERMISSION_DENIED:
-                utils.showWarningMessage('Geolocation request denied, random location is chosen.')
+                utils.showWarningMessage(i18next.t('logging.geolocation_request_denied_warn'))
                 break;
             case error.POSITION_UNAVAILABLE:
-                utils.showWarningMessage('Location information unavailable.')
+                utils.showWarningMessage(i18next.t('logging.location_info_unavailable_warn'));
                 break;
             case error.TIMEOUT:
             case error.UNKNOWN_ERR:
             default:
-                utils.showErrorMessage('Location error occurred. Please try again later.')
+                utils.showErrorMessage(i18next.t('logging.location_error'));
                 break;
         }
     },

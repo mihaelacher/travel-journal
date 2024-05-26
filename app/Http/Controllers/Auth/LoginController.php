@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\LoginPostRequest;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
+use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
@@ -33,6 +34,18 @@ class LoginController extends Controller
             'Cache-Control' => 'no-store, no-cache, must-revalidate, post-checked, pre-checked',
             'Pragma' => 'no-cache',
         ]);
+    }
+
+    /**
+     * POST /auth/login
+     *
+     * @param LoginPostRequest $request
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
+     * @throws ValidationException
+     */
+    public function login(LoginPostRequest $request)
+    {
+        return parent::login($request);
     }
 
     /**

@@ -5,12 +5,12 @@
     <form id="login-form" class="col s12" method="post" action="{{ route('login') }}">
         @csrf
 
-        <x-forms.input name="email"/>
-        <x-forms.input name="password" type="password"/>
-        <x-forms.checkbox name="Remember me" type="password"/>
-        <x-forms.button value="Sign In"/>
+        <x-forms.input text="{{trans('auth.email')}}" name="email"/>
+        <x-forms.input text="{{trans('auth.password')}}" name="password" type="password"/>
+        <x-forms.checkbox name="{{trans('auth.remember_me')}}"/>
+        <x-forms.button value="{{trans('auth.sign_up_btn')}}"/>
 
-        <span class="d-block text-center my-4 text-muted">&mdash; or sign in with &mdash;</span>
+        <span class="d-block text-center my-4 text-muted">{{ trans('auth.sign_in_switch') }}</span>
 
         <div class="row justify-content-center">
             <div class="col-md-10 text-center">

@@ -27,7 +27,7 @@ const mapShareLocationsModal = {
             $('#map').append(data);
             return M.Modal.init($('#share-locations-modal'));
         } catch (error) {
-            utils.showErrorMessage('Something went wrong! Please, try again later.');
+            utils.showErrorMessage(i18next.t('map.general_error'));
             throw error;
         }
     },

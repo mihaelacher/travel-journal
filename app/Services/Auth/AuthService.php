@@ -30,7 +30,7 @@ class AuthService
 
             return $user;
         } catch (\Exception $e) {
-            \Log::error(msg: 'Error occurred while fetching or creating user: ' . $e->getMessage());
+            \Log::error(msg: trans('logging.error_fetching_user') . $e->getMessage());
             throw $e;
         }
     }

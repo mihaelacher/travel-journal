@@ -38,9 +38,11 @@ class VisitedLocationsAjaxResourceController extends AuthController
             $visitedLocations = $this->locationDataService->fetchUsersVisitedLocations(userId: $request->currentUser->id);
 
             return response()->api(['data' => $visitedLocations], 200);
+        } catch (CannotCreateData $exception) {
+            return response()->api(['error' => trans('map.data_not_complete')], 400);
         } catch (\Exception $e) {
             LogUtil::logError(message: $e->getMessage());
-            return response()->api(['error' => 'Something went wrong. Please, try again later.'], 500);
+            return response()->api(['error' => trans('map.general_error')], 500);
         }
     }
 
@@ -69,14 +71,14 @@ class VisitedLocationsAjaxResourceController extends AuthController
 
             $this->locationDataService->markLocationAsVisited(data: $markLocationAsVisitedData);
 
-            return response()->api(['message' => 'You\'ve successfully marked the place as visited.'], 200);
-        }catch (CannotCreateData $exception) {
-            return response()->api(['error' => 'Data not complete.'], 400);
+            return response()->api(['message' => trans('map.mark_as_visited_success')], 200);
+        } catch (CannotCreateData $exception) {
+            return response()->api(['error' => trans('map.data_not_complete')], 400);
         } catch (FileStorageException $e) {
             return response()->api(['error' => $e->getMessage()], 500);
         } catch (\Exception $e) {
             LogUtil::logError(message: $e->getMessage());
-            return response()->api(['error' => 'Something went wrong. Please, try again later.'], 500);
+            return response()->api(['error' => trans('map.general_error')], 500);
         }
     }
 
@@ -97,12 +99,12 @@ class VisitedLocationsAjaxResourceController extends AuthController
                 userId: $request->currentUser->id
             );
 
-            return response()->api(['message' => 'You\'ve successfully deleted the visited place.'], 200);
+            return response()->api(['message' => trans('map.delete_location_success')], 200);
         } catch (FileStorageException $e) {
             return response()->api(['error' => $e->getMessage()], 500);
         } catch (\Exception $e) {
             LogUtil::logError(message: $e->getMessage());
-            return response()->api(['error' => 'Something went wrong. Please, try again later.'], 500);
+            return response()->api(['error' => trans('map.general_error')], 500);
         }
     }
 }

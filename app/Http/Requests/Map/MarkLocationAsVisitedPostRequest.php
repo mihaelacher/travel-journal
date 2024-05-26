@@ -19,9 +19,9 @@ class MarkLocationAsVisitedPostRequest extends MainFormRequest
     public function messages(): array
     {
         return [
-            'files.*.image' => 'The uploaded file must be an image.',
-            'files.*.mimes' => 'Only JPEG, PNG, JPG, and GIF files are allowed.',
-            'files.*.max' => 'The uploaded file may not be greater than 2MB.',
+            'files.*.image' => trans('validation.image'),
+            'files.*.mimes' => trans('validation.mimes', ['attribute' => 'files', 'values' => 'jpeg,png,jpg,gif']),
+            'files.*.max' => trans('validation.max.file', ['attribute' => 'files', 'max' => 1024]),
         ];
     }
 

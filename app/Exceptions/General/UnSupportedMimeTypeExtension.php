@@ -6,8 +6,9 @@ use Exception;
 
 class UnSupportedMimeTypeExtension extends Exception
 {
-    public function __construct(string $message = 'Unsupported file format.')
+    public function __construct(string $message = null)
     {
+        $message = $message ?? trans('logging.unsupported_file_format_error');
         parent::__construct($message);
     }
 }

@@ -29,7 +29,7 @@ class RegistrationController extends Controller
             LogUtil::logError(message: $e->getMessage());
             return redirect()
                 ->back()
-                ->with('error', 'Failed to register. Please, try again.');
+                ->with('error', trans('auth.register_failed'));
         }
     }
 }

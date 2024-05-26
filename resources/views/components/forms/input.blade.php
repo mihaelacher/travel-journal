@@ -1,7 +1,7 @@
 <div class="row">
     <div class="input-field col s12">
         <input
-            placeholder="{{'Enter ' . \App\Services\Utils\StrUtil::formatInputText($name)}}"
+            placeholder="{{'Enter ' . $text ?? \App\Services\Utils\StrUtil::formatInputText($name)}}"
             id="{{$name}}"
             type="{{$type}}"
             class="validate"

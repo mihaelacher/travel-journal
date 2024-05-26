@@ -84,7 +84,7 @@ class ShareLocationsAjaxController extends AuthController
             return response()->api(['data' => $userSharedLocations], 200);
         } catch (\Exception $e) {
             LogUtil::logError(message: $e->getMessage());
-            return response()->api(['error' => 'Something went wrong. Please, try again later.'], 500);
+            return response()->api(['error' => trans('map.general_error')], 500);
         }
     }
 
@@ -107,10 +107,10 @@ class ShareLocationsAjaxController extends AuthController
                 shareLocationsUserId: $shareLocationsUserId
             );
 
-            return response()->api(['message' => 'Location successfully shared.'], 200);
+            return response()->api(['message' => trans('map.share_location_success')], 200);
         } catch (\Exception $e) {
             LogUtil::logError($e->getMessage());
-            return response()->api(['error' => 'Something went wrong. Please, try again later.'], 500);
+            return response()->api(['error' => trans('map.general_error')], 500);
         }
     }
 }
