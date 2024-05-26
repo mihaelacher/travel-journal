@@ -24,7 +24,7 @@ class GooglePlacesAjaxResourceController extends AuthController
     /**
      * Fetches nearby locations based on user clicked locations using Google Places API
      *
-     * GET /ajax/fetchNearbyLocations
+     * GET /ajax/nearby-locations
      *
      * @param FetchNearbyLocationsGetRequest $request
      * @return mixed

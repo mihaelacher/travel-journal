@@ -15,6 +15,7 @@ class VisitedLocationData extends Data
         #[MapInputName('uploaded_files')]
         public ?array $photos,
         public Carbon $visited_at,
+        public string $name,
         public ?int $location_id = null
     ) {
     }

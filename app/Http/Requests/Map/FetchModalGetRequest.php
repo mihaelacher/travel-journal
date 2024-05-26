@@ -28,8 +28,8 @@ class FetchModalGetRequest extends MainGetRequest
                 userId: $userId
             )
             || $this->shareLocationsDataService->isLocationSharedWithUser(
+                userId: $userId,
                 locationId: $locationId,
-                userId: $userId
             );
     }
 }

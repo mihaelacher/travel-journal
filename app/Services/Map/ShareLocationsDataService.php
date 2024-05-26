@@ -56,18 +56,25 @@ class ShareLocationsDataService
     }
 
     /**
-     * Checks if the user has shared location for the given location id
+     * Checks if the user has shared location for the given location id or user id
      *
-     * @param int $locationId
-     * @param int $userId
+     * @param int|null $locationId
+     * @param int|null $userId
      * @param int|null $locationShareUserId
      * @return bool
      */
-    public function isLocationSharedWithUser(int $locationId, int $userId, int $locationShareUserId = null): bool
+    public function isLocationSharedWithUser(int $userId = null, int $locationId = null, int $locationShareUserId = null): bool
     {
+        if (!isset($locationId) && !isset($locationShareUserId)) {
+            return false;
+        }
+
         $query = ShareLocationsUser::join('user_locations', 'user_locations.user_id', '=', 'share_locations_users.user_id')
-            ->where('share_locations_users.share_locations_user_id', '=', $userId)
-            ->where('user_locations.location_id', '=', $locationId);
+            ->where('share_locations_users.share_locations_user_id', '=', $userId);
+
+        if (isset($locationId)) {
+            $query->where('user_locations.location_id', '=', $locationId);
+        }
 
         if (isset($locationShareUserId)) {
             $query->where('share_locations_users.user_id', '=', $locationShareUserId);

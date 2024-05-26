@@ -12,7 +12,7 @@ class LocationsAjaxController extends AuthController
     /**
      * Fetches location's modal
      *
-     * GET /ajax/fetchLocationModal
+     * GET /ajax/location-model
      * @param FetchModalGetRequest $request
      * @return View
      */

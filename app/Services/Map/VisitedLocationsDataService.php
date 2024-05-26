@@ -166,6 +166,7 @@ class VisitedLocationsDataService
                 [
                     'latitude'      => $data->latitude,
                     'longitude'     => $data->longitude,
+                    'name'          => $data->name
                 ]
             );
             $location->save();

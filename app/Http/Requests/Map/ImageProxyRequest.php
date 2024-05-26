@@ -24,8 +24,8 @@ class ImageProxyRequest extends MainGetRequest
 
         if ($currentUserId !== $requestUserId) {
             return $this->shareLocationsDataService->isLocationSharedWithUser(
-                locationId: $locationId,
                 userId: $currentUserId,
+                locationId: $locationId,
                 locationShareUserId: $requestUserId
             );
         }

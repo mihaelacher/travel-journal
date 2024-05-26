@@ -12,6 +12,7 @@ use App\Services\Map\VisitedLocationsDataService;
 use App\Services\Utils\LogUtil;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
+use Spatie\LaravelData\Exceptions\CannotCreateData;
 
 class VisitedLocationsAjaxResourceController extends AuthController
 {
@@ -26,7 +27,7 @@ class VisitedLocationsAjaxResourceController extends AuthController
     /**
      * Fetches current user's visited locations
      *
-     * GET /ajax/fetchVisitedLocations
+     * GET /ajax//visited-locations
      * @param FetchVisitedLocationsGetRequest $request
      * @return JsonResponse
      * @throws \Exception
@@ -46,23 +47,31 @@ class VisitedLocationsAjaxResourceController extends AuthController
     /**
      * Marks placed as visited by providing date and location's photos
      *
-     * POST /ajax/markLocationAsVisited
+     * POST /ajax/location/{latitude}/{longitude}/mark-as-visited
      * @param MarkLocationAsVisitedPostRequest $request
+     * @param string $latitude
+     * @param string $longitude
      * @return JsonResponse
      * @throws \Throwable
      */
-    public function markLocationAsVisited(MarkLocationAsVisitedPostRequest $request): JsonResponse
+    public function markLocationAsVisited(MarkLocationAsVisitedPostRequest $request, string $latitude, string $longitude): JsonResponse
     {
         try {
             $markLocationAsVisitedData = VisitedLocationData::from(
-                $request->input()
-                + array('user_id' => $request->currentUser->id)
-                + array('uploaded_files' => $request->files->get('uploaded_files'))
+                $request->only(['location_id', 'name', 'visited_at'])
+                + [
+                    'latitude'      => $latitude,
+                    'longitude'     => $longitude,
+                    'user_id'       => $request->currentUser->id,
+                    'uploaded_files'=> $request->files->get('uploaded_files'),
+                ]
             );
 
             $this->locationDataService->markLocationAsVisited(data: $markLocationAsVisitedData);
 
             return response()->api(['message' => 'You\'ve successfully marked the place as visited.'], 200);
+        }catch (CannotCreateData $exception) {
+            return response()->api(['error' => 'Data not complete.'], 400);
         } catch (FileStorageException $e) {
             return response()->api(['error' => $e->getMessage()], 500);
         } catch (\Exception $e) {
@@ -74,17 +83,18 @@ class VisitedLocationsAjaxResourceController extends AuthController
     /**
      * Delete visited location
      *
-     * POST /ajax/deleteVisitedLocation
+     * POST /ajax/visited-locations/{locationId}
      * @param DeleteVisitedLocationRequest $request
+     * @param int $locationId
      * @return JsonResponse
      * @throws \Throwable
      */
-    public function deleteVisitedLocation(DeleteVisitedLocationRequest $request): JsonResponse
+    public function deleteVisitedLocation(DeleteVisitedLocationRequest $request, int $locationId): JsonResponse
     {
         try {
             $this->locationDataService->deleteVisitedLocation(
-                locationId: $request->input('location_id'),
-                userId: Auth::id()
+                locationId: $locationId,
+                userId: $request->currentUser->id
             );
 
             return response()->api(['message' => 'You\'ve successfully deleted the visited place.'], 200);

@@ -30,7 +30,7 @@ class GooglePlacesDataService
         switch ($data['status']) {
             case 'NOT_FOUND':
             case 'ZERO_RESULTS':
-                return ['warning' => 'No results found for the requested area.'];
+                return ['warning' => 'No results found for the requested area.', 'data' => []];
             case 'INVALID_REQUEST':
             case 'OVER_QUERY_LIMIT':
             case 'UNKNOWN_ERROR':

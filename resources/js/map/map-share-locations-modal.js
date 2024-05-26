@@ -6,7 +6,7 @@ const mapShareLocationsModal = {
         utils.showLoader();
         $.ajax({
             method: 'GET',
-            url: '/ajax/fetchShareLocationsModal',
+            url: '/ajax/share-locations-modal',
             contentType: 'application/json',
             success: async function (data) {
                 try {
@@ -35,7 +35,7 @@ const mapShareLocationsModal = {
     fetchShareLocationsButton(map) {
         $.ajax({
             method: 'GET',
-            url: '/ajax/fetchShareLocationsButton',
+            url: '/ajax/share-locations-button',
             contentType: 'application/json',
             success: function (response) {
                 const container = document.createElement('div');
@@ -65,7 +65,7 @@ const mapShareLocationsModal = {
         const collectionItem = $($this).closest('.collection-item');
         const userId = collectionItem.find('#user-id').val();
         const locationsBuilder = new LocationsBuilder(map);
-        locationsBuilder.fetchLocations('fetchUserVisitedSharedLocations', { 'user_id': userId });
+        locationsBuilder.fetchLocations('users/' + userId + '/shared-locations');
         $($this).hide();
         collectionItem.find('.hide-locations').show();
     },
@@ -86,7 +86,7 @@ const mapShareLocationsModal = {
         const csrfToken = collectionItem.find('input[name="_token"]').val();
         $.ajax({
             method: 'POST',
-            url: '/ajax/shareLocationsWithUser',
+            url: '/ajax/users/' + collectionItem.find('#user-id').val() + '/share-locations',
             data: { user_id: collectionItem.find('#user-id').val() },
             headers: { 'X-CSRF-TOKEN': csrfToken },
             success: function (response) {

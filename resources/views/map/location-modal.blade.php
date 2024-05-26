@@ -21,7 +21,7 @@
                 <form id="place-visited-form" class="col md-8" enctype="multipart/form-data">
                     <meta name="csrf-token" content="{{ csrf_token() }}">
                     <input id="location_id" name="location_id" type="hidden" value="{{$locationId}}">
-                    <input name="latitude" type="hidden" value="{{$name}}"/>
+                    <input name="name" type="hidden" value="{{$name}}"/>
                     <input name="latitude" type="hidden" value="{{$latitude}}"/>
                     <input name="longitude" type="hidden" value="{{$longitude}}"/>
                     <x-forms.datepicker name="visited_at" labelText="Visited at" value="{{$visitedAt}}"/>

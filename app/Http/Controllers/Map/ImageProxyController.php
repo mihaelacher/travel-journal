@@ -13,7 +13,7 @@ class ImageProxyController extends AuthController
     /**
      * Fetches images
      *
-     * GET /ajax/getPlaceImage
+     * GET /ajax/place/image
      * @param ImageProxyRequest $request
      * @return Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Foundation\Application|\Illuminate\Http\Response
      * @throws StorageLocationPlacePhotoException

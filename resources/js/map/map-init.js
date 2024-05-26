@@ -18,7 +18,7 @@ const mapInitializer = {
             const map = await this.create(locationObj)
 
             const locationsBuilder = new LocationsBuilder(map);
-            locationsBuilder.fetchLocations('fetchVisitedLocations');
+            locationsBuilder.fetchLocations('visited-locations');
             this.attachEventListeners(map, locationsBuilder)
 
             utils.hideLoader();
@@ -90,7 +90,7 @@ const mapInitializer = {
                 lng: event.latLng.lng()
             };
             locationsBuilder.fetchLocations(
-                'fetchNearbyLocations',
+                'nearby-locations',
                 {clickedLocation: JSON.stringify(clickedLocation)}
             );
         });

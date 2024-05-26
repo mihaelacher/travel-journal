@@ -18,7 +18,7 @@ class DeleteVisitedLocationRequest extends MainFormRequest
     public function authorize(): bool
     {
         return $this->locationService->isLocationVisitedByUser(
-            locationId: $this->input('location_id'),
+            locationId: $this->route('locationId'),
             userId: $this->currentUser->id
         );
     }

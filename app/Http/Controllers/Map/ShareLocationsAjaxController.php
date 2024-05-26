@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Map;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Requests\Map\FetchModalGetRequest;
 use App\Http\Requests\Map\FetchShareLocationsButtonGetRequest;
-use App\Http\Requests\Map\FetchUserVisitedSharedLocationsGetRequest;
+use App\Http\Requests\Map\FetchUserSharedLocationsGetRequest;
 use App\Services\Map\ShareLocationsDataService;
 use App\Services\Map\VisitedLocationsDataService;
 use App\Services\Utils\LogUtil;
@@ -29,7 +29,7 @@ class ShareLocationsAjaxController extends AuthController
     /**
      * Fetches share locations's modal
      *
-     * GET /ajax/fetchShareLocationsModal
+     * GET /ajax/share-locations-modal
      * @param FetchModalGetRequest $request
      * @return View
      */
@@ -48,7 +48,7 @@ class ShareLocationsAjaxController extends AuthController
     /**
      * Fetches location's modal
      *
-     * GET /ajax/fetchShareLocationsButton
+     * GET /ajax/share-locations-button
      * @param FetchShareLocationsButtonGetRequest $request
      * @return View
      */
@@ -66,16 +66,17 @@ class ShareLocationsAjaxController extends AuthController
     /**
      * Fetches shared locations modal
      *
-     * GET /ajax/fetchUserVisitedSharedLocations
-     * @param FetchUserVisitedSharedLocationsGetRequest $request
+     * GET /ajax/users/{userId}/shared-locations
+     * @param FetchUserSharedLocationsGetRequest $request
+     * @param int $userId
      * @return JsonResponse
      * @throws \Exception
      */
-    public function fetchUserVisitedSharedLocations(FetchUserVisitedSharedLocationsGetRequest $request): JsonResponse
+    public function fetchUserSharedLocations(FetchUserSharedLocationsGetRequest $request, int $userId): JsonResponse
     {
         try {
             $userSharedLocations = $this->visitedLocationsDataService->fetchUsersVisitedLocations(
-                userId: $request->query('user_id'),
+                userId: $userId,
                 isShared: true
             );
 
@@ -89,15 +90,16 @@ class ShareLocationsAjaxController extends AuthController
     /**
      * Share location with user
      *
-     * GET /ajax/shareLocationsWithUser
-     * @param FetchUserVisitedSharedLocationsGetRequest $request
+     * GET ajax/users/{userId}/share-locations
+     * @param FetchUserSharedLocationsGetRequest $request
+     * @param int $userId
      * @return JsonResponse
      * @throws \Exception
      */
-    public function shareLocationsWithUser(FetchUserVisitedSharedLocationsGetRequest $request): JsonResponse
+    public function shareLocationsWithUser(FetchUserSharedLocationsGetRequest $request, int $userId): JsonResponse
     {
         try {
-            $shareLocationsUserId = $request->input('user_id');
+            $shareLocationsUserId = $userId;
             $currentUserId = $request->currentUser->id;
             $this->shareLocationsDataService->shareLocationsWithUser(
                 userId: $currentUserId,

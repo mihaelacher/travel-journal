@@ -6,7 +6,7 @@ const mapModal = {
         utils.showLoader();
         $.ajax({
             method: 'GET',
-            url: '/ajax/fetchLocationModal',
+            url: '/ajax/location-model',
             contentType: 'application/json',
             data: {
                 photoUrls: JSON.stringify(place.photo_urls),
@@ -45,7 +45,7 @@ const mapModal = {
 
         $.ajax({
             type: 'POST',
-            url: '/ajax/markLocationAsVisited',
+            url: '/ajax/location/' + formData.get('latitude') + '/' + formData.get('longitude') + '/mark-as-visited',
             data: formData,
             contentType: false,
             processData: false,
@@ -104,8 +104,7 @@ const mapModal = {
     deleteVisitedLocation(locationId, csrfToken) {
         $.ajax({
             type: 'DELETE',
-            url: '/ajax/deleteVisitedLocation',
-            data: { location_id: locationId },
+            url: '/ajax/visited-locations/' + locationId,
             headers: { 'X-CSRF-TOKEN': csrfToken },
             success: (response) => {
                 $('#location-modal').modal('hide');

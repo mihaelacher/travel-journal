@@ -11,7 +11,7 @@ class AjaxController extends Controller
     /**
      * Fetch the authentication form based on the request parameter.
      *
-     * GET /auth
+     * GET /auth/form
      * @param FetchAuthFormGetRequest $request
      * @return View
      */
