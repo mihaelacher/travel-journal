@@ -7,6 +7,7 @@ use Spatie\LaravelData\Attributes\MapInputName;
 use Spatie\LaravelData\Data;
 
 class MapLocationData extends Data {
+
     public function __construct(
         public ?string $icon,
         public ?string $name,
@@ -20,9 +21,6 @@ class MapLocationData extends Data {
     ) {
     }
 
-    /**
-     * @throws \Exception
-     */
     public static function from(mixed ...$payloads): static
     {
         $payload = reset($payloads);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Map;
 
+use App\Data\Map\LocationModalData;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Requests\Map\FetchModalGetRequest;
 use Carbon\Carbon;
@@ -12,27 +13,18 @@ class LocationsAjaxController extends AuthController
     /**
      * Fetches location's modal
      *
-     * GET /ajax/location-model
+     * GET /ajax/location-modal/{locationId}
      * @param FetchModalGetRequest $request
+     * @param int $locationId
      * @return View
+     * @throws \Exception
      */
-    public function fetchLocationModal(FetchModalGetRequest $request): View
+    public function fetchLocationModal(FetchModalGetRequest $request, int $locationId): View
     {
-        $location = $request->query('location');
-        $visitedAt = $request->query('visited_at')
-            ? Carbon::parse($request->query('visited_at'))->format('M d, Y')
-            : '';
+        $data = LocationModalData::from(
+            $request->all() + array(['location_id' => $locationId])
+        );
 
-        $params = [
-            'photoUrls'   => $request->query('photo_urls'),
-            'name'        => $request->query('name'),
-            'latitude'    => $location['lat'] ?? null,
-            'longitude'   => $location['lng'] ?? null,
-            'visitedAt'   => $visitedAt,
-            'locationId'  => $request->query('location_id'),
-            'isShared'    => $request->query('is_shared'),
-        ];
-
-        return view('map.location-modal', $params);
+        return view('map.location-modal', $data->toArray());
     }
 }

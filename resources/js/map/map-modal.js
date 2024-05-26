@@ -6,13 +6,12 @@ const mapModal = {
         utils.showLoader();
         $.ajax({
             method: 'GET',
-            url: '/ajax/location-model',
+            url: '/ajax/location-modal/' + place.location_id,
             contentType: 'application/json',
             data: {
                 photo_urls: JSON.stringify(place.photo_urls),
                 name: place.name,
                 location: utils.parseLocation(place.longitude, place.latitude),
-                location_id: place.location_id,
                 visited_at: place.visited_at,
                 user_id: place.user_id,
                 is_shared: place.is_shared,
