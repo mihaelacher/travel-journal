@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Requests\Map\FetchModalGetRequest;
 use App\Http\Requests\Map\FetchShareLocationsButtonGetRequest;
 use App\Http\Requests\Map\FetchUserSharedLocationsGetRequest;
+use App\Http\Requests\Map\ShareLocationsWithUserPostRequest;
 use App\Services\Map\ShareLocationsDataService;
 use App\Services\Map\VisitedLocationsDataService;
 use App\Services\Utils\LogUtil;
@@ -91,12 +92,12 @@ class ShareLocationsAjaxController extends AuthController
      * Share location with user
      *
      * GET ajax/users/{userId}/share-locations
-     * @param FetchUserSharedLocationsGetRequest $request
+     * @param ShareLocationsWithUserPostRequest $request
      * @param int $userId
      * @return JsonResponse
      * @throws \Exception
      */
-    public function shareLocationsWithUser(FetchUserSharedLocationsGetRequest $request, int $userId): JsonResponse
+    public function shareLocationsWithUser(ShareLocationsWithUserPostRequest $request, int $userId): JsonResponse
     {
         try {
             $shareLocationsUserId = $userId;
