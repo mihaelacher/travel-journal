@@ -24,7 +24,7 @@ class LocationsAjaxController extends AuthController
             : '';
 
         $params = [
-            'photoUrls'   => $request->query('photoUrls'),
+            'photoUrls'   => $request->query('photo_urls'),
             'name'        => $request->query('name'),
             'latitude'    => $location['lat'] ?? null,
             'longitude'   => $location['lng'] ?? null,

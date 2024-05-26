@@ -9,7 +9,7 @@ const mapModal = {
             url: '/ajax/location-model',
             contentType: 'application/json',
             data: {
-                photoUrls: JSON.stringify(place.photo_urls),
+                photo_urls: JSON.stringify(place.photo_urls),
                 name: place.name,
                 location: utils.parseLocation(place.longitude, place.latitude),
                 location_id: place.location_id,
