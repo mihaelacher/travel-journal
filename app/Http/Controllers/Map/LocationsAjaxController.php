@@ -13,17 +13,13 @@ class LocationsAjaxController extends AuthController
     /**
      * Fetches location's modal
      *
-     * GET /ajax/location-modal/{locationId}
+     * GET /ajax/location-modal
      * @param FetchModalGetRequest $request
-     * @param int $locationId
      * @return View
-     * @throws \Exception
      */
-    public function fetchLocationModal(FetchModalGetRequest $request, int $locationId): View
+    public function fetchLocationModal(FetchModalGetRequest $request): View
     {
-        $data = LocationModalData::from(
-            $request->all() + array(['location_id' => $locationId])
-        );
+        $data = LocationModalData::from($request->all());
 
         return view('map.location-modal', $data->toArray());
     }

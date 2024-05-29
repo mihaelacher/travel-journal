@@ -27,7 +27,7 @@ class LocationModalData extends Data {
     public static function from(mixed ...$payloads): static
     {
         $payload = reset($payloads);
-        $payload['visited_at'] = $payload['visited_at']
+        $payload['visited_at'] = isset($payload['visited_at'])
             ? Carbon::parse($payload['visited_at'])->format('M d, Y')
             : '';
 

@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 // AJAX routes
 Route::group(['prefix' => 'ajax'], function () {
     Route::get('/nearby-locations', [\App\Http\Controllers\Map\GooglePlacesAjaxResourceController::class, 'fetchNearbyLocations']);
-    Route::get('/location-modal/{locationId}', [\App\Http\Controllers\Map\LocationsAjaxController::class, 'fetchLocationModal']);
+    Route::get('/location-modal', [\App\Http\Controllers\Map\LocationsAjaxController::class, 'fetchLocationModal']);
     Route::get('/share-locations-modal', [\App\Http\Controllers\Map\ShareLocationsAjaxController::class, 'fetchShareLocationsModal']);
     Route::get('/share-locations-button', [\App\Http\Controllers\Map\ShareLocationsAjaxController::class, 'fetchShareLocationsButton']);
     Route::get('/users/{userId}/shared-locations', [\App\Http\Controllers\Map\ShareLocationsAjaxController::class, 'fetchUserSharedLocations']);
